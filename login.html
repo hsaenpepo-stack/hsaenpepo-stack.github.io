@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>HA - Secure Access</title>
+
+  <!-- ✅ لو بالفعل داخل، رجّعه على next أو index -->
+  <script>
+  (function(){
+    const AUTH_KEY = "HA_AUTH_OK";
+    const p = new URLSearchParams(location.search);
+    const next = p.get("next") || "index.html";
+    if (sessionStorage.getItem(AUTH_KEY) === "1") {
+      location.replace(next);
+    }
+  })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1016;
+  --card:#121722;
+  --accent:#ff9d2f;
+  --teal:#14e0c3;
+  --text:#fff;
+  --muted:#bfc7d6;
+  --danger:#ff5c5c;
+  --ok:#5CFFB0;
+  --radius:18px;
+  --shadow:0 18px 55px rgba(0,0,0,0.45);
+}
+
+*{box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{
+  margin:0; min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(20,224,195,.14), transparent 42%),
+    radial-gradient(circle at 80% 40%, rgba(255,157,47,.16), transparent 42%),
+    var(--bg);
+  display:grid; place-items:center;
+  color:var(--text);
+  overflow:hidden;
+}
+
+/* خلفية اختيارية */
+.bg{
+  position:fixed; inset:0;
+  background:url("assets/bg/login-bg.jpg") center/cover no-repeat;
+  opacity:.08;
+  pointer-events:none;
+}
+
+/* أنيميشن هادي (Blob) */
+.blob{
+  position:fixed; width:520px; height:520px;
+  filter: blur(40px);
+  opacity:.22;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, rgba(20,224,195,.9), transparent 55%),
+              radial-gradient(circle at 70% 70%, rgba(255,157,47,.9), transparent 55%);
+  animation: drift 10s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.blob.b2{
+  width:620px;height:620px;opacity:.16;
+  animation-duration: 13s;
+  transform: translate(220px, 140px);
+}
+@keyframes drift{
+  from{transform:translate(-180px,-120px) scale(1);}
+  to{transform:translate(-120px,-160px) scale(1.06);}
+}
+
+.card{
+  width:min(520px, 92%);
+  background:rgba(18,23,34,.88);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:var(--shadow);
+  padding:28px;
+  border-radius:var(--radius);
+  position:relative;
+}
+
+.brandRow{
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:14px;
+}
+.logo{
+  width:44px;height:44px;border-radius:14px;
+  object-fit:cover;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+.brandTitle{
+  display:flex; flex-direction:column; line-height:1.2;
+}
+.brandTitle b{font-size:16px;font-weight:900;}
+.brandTitle span{font-size:12px;color:var(--muted);font-weight:700;}
+
+h1{
+  margin:10px 0 0;
+  font-size:34px;
+  font-weight:900;
+}
+.sub{
+  margin-top:6px;
+  color:var(--muted);
+  font-weight:700;
+  line-height:1.7;
+}
+
+.inputWrap{
+  margin-top:22px;
+  position:relative;
+}
+
+input{
+  width:100%;
+  padding:14px 48px 14px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.22);
+  color:#fff;
+  font-weight:900;
+  outline:none;
+  transition:.2s;
+}
+input:focus{
+  border-color: rgba(20,224,195,.55);
+  box-shadow: 0 0 0 4px rgba(20,224,195,.10);
+}
+
+.eye{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:18px;
+  opacity:.75;
+  user-select:none;
+}
+
+.btn{
+  margin-top:14px;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-weight:900;
+  cursor:pointer;
+  color:#1a0f00;
+  background: linear-gradient(90deg, rgba(255,157,47,1), rgba(255,120,0,1));
+  box-shadow:
+    0 14px 40px rgba(255,157,47,.22),
+    0 0 0 1px rgba(255,255,255,.08) inset;
+  transition:.18s;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Glow “تقني” */
+.btn::after{
+  content:"";
+  position:absolute; inset:-40%;
+  background: radial-gradient(circle, rgba(255,255,255,.35), transparent 55%);
+  transform: translateX(-40%);
+  opacity:.35;
+  transition:.25s;
+}
+.btn:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+.btn:hover::after{ transform: translateX(20%); opacity:.45; }
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.row{
+  display:flex; justify-content:space-between; gap:10px;
+  margin-top:10px;
+  color:var(--muted);
+  font-weight:800;
+  font-size:12px;
+}
+
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 10px; border-radius:999px;
+  background:rgba(20,224,195,.10);
+  border:1px solid rgba(20,224,195,.28);
+  color:var(--teal);
+}
+
+.msg{
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  font-weight:900;
+  display:none;
+}
+.msg.err{
+  display:block;
+  border-color: rgba(255,92,92,.35);
+  background: rgba(255,92,92,.08);
+  color:#ffd0d0;
+}
+.msg.ok{
+  display:block;
+  border-color: rgba(92,255,176,.35);
+  background: rgba(92,255,176,.08);
+  color:#d8ffe9;
+}
+
+/* Shake عند الخطأ */
+.shake{
+  animation: shake .22s linear 0s 2;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-8px)}
+  50%{transform:translateX(8px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="blob"></div>
+<div class="blob b2"></div>
+
+<div class="card" id="card">
+  <div class="brandRow">
+    <img class="logo" src="assets/hero/hero.png" alt="HA" loading="eager" decoding="async">
+    <div class="brandTitle">
+      <b>HA - Visual School</b>
+      <span>Secure Access</span>
+    </div>
+  </div>
+
+  <h1>مرحبًا بك</h1>
+  <div class="sub">كل سنة وأنتم طيبين — ادخل كلمة المرور للمتابعة</div>
+
+  <div class="inputWrap">
+    <input id="pass" type="password" placeholder="كلمة المرور" autocomplete="current-password" />
+    <span class="eye" id="eye" title="إظهار/إخفاء">👁</span>
+  </div>
+
+  <button class="btn" id="btn">دخول</button>
+
+  <div class="row">
+    <span class="badge">🔒 دخول خاص بالمشتركين</span>
+    <span id="tries">محاولات متبقية: 5</span>
+  </div>
+
+  <div id="msg" class="msg"></div>
+</div>
+
+<script>
+/* =========================
+   ✅ إعدادات سهلة للتغيير يوميًا
+========================= */
+// غيّري الباسورد هنا فقط كل يوم
+const PASSWORD_TODAY = "HA-2026";
+
+/* ✅ نفس المفتاح المستخدم في index.html */
+const AUTH_KEY = "HA_AUTH_OK"; // sessionStorage
+
+/* =========================
+   ✅ Helpers
+========================= */
+const $ = (id)=>document.getElementById(id);
+const card = $("card");
+const pass = $("pass");
+const btn  = $("btn");
+const msg  = $("msg");
+const eye  = $("eye");
+const triesEl = $("tries");
+
+let tries = 5;
+let lockedUntil = 0;
+
+function safeNext(){
+  const p = new URLSearchParams(location.search);
+  let next = (p.get("next") || "index.html").trim();
+
+  // امنعي أي مسار خارجي/غريب
+  if(!next || next.includes("://") || next.startsWith("//") || next.startsWith("javascript:")) {
+    next = "index.html";
+  }
+
+  // امنعي الرجوع لـ login نفسه
+  if(next.toLowerCase().includes("login.html")) next = "index.html";
+
+  // لو حد بعت مسار كامل: خدي اسم الملف بس
+  if(next.includes("/")) next = next.split("/").pop();
+
+  return next || "index.html";
+}
+
+function setMsg(text, type){
+  msg.className = "msg " + (type || "");
+  msg.textContent = text || "";
+  msg.style.display = text ? "block" : "none";
+}
+
+function shake(){
+  card.classList.remove("shake");
+  void card.offsetWidth;
+  card.classList.add("shake");
+}
+
+eye.addEventListener("click", ()=>{
+  pass.type = pass.type === "password" ? "text" : "password";
+});
+
+function now(){ return Date.now(); }
+
+function lockFor(ms){
+  lockedUntil = now() + ms;
+  btn.disabled = true;
+  const iv = setInterval(()=>{
+    const left = Math.max(0, lockedUntil - now());
+    const s = Math.ceil(left/1000);
+
+    if(left <= 0){
+      clearInterval(iv);
+      btn.disabled = false;
+      setMsg("", "");
+      btn.textContent = "دخول";
+      return;
+    }
+    setMsg("تم إيقاف المحاولات مؤقتًا: " + s + " ثانية", "err");
+  }, 250);
+}
+
+function updateTries(){
+  triesEl.textContent = "محاولات متبقية: " + tries;
+}
+
+async function doLogin(){
+  if(now() < lockedUntil) return;
+
+  const value = (pass.value || "").trim();
+
+  if(!value){
+    shake();
+    setMsg("اكتب كلمة المرور أولًا.", "err");
+    pass.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  const oldText = btn.textContent;
+  btn.textContent = "جاري التحقق...";
+  setMsg("", "");
+
+  await new Promise(r=>setTimeout(r, 380));
+
+  if (value === PASSWORD_TODAY) {
+    sessionStorage.setItem(AUTH_KEY, "1");
+    setMsg("تم الدخول بنجاح ✅", "ok");
+
+    const nextPage = safeNext();
+    setTimeout(() => {
+      window.location.replace("./" + nextPage);
+    }, 350);
+
+    return;
+  }
+
+  // غلط
+  tries -= 1;
+  updateTries();
+  shake();
+  setMsg("كلمة المرور غير صحيحة.", "err");
+
+  btn.disabled = false;
+  btn.textContent = oldText;
+
+  if(tries <= 0){
+    tries = 5;
+    updateTries();
+    lockFor(15000);
+  }
+}
+
+btn.addEventListener("click", doLogin);
+pass.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter") doLogin();
+});
+
+// ✅ لا تعمل Redirect هنا إطلاقًا (كان سبب Loop)
+updateTries();
+</script>
+
+</body>
+</html>
