@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>HA - Visual School</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================================================
+   ✅ [CONTROL PANEL] 0) كل الكنترول هنا (ألوان/فونت/مقاسات/روابط)
+   - عدّل هنا فقط بدون ما تلمس باقي الكود
+===================================================================================== */
+html, body{
+  width:100%;
+  overflow-x:hidden;
+}
+
+
+
+
+:root{
+
+  /* ================= COLORS ================= */
+
+  --bg-dark:#0b1016;
+  --bg-card:#121722;
+
+  /* ألوان الأزرار */
+  --accent-orange:#ff9d2f;
+  --accent-teal:#14e0c3;   /* teal حقيقي */
+
+  /* ================= الخلفية العامة ================= */
+
+  /* طبقة يمين (دافئة خفيفة) */
+  --grad-orange: rgba(255,140,0,0.18);
+
+  /* طبقة شمال (teal غامق سينمائي) */
+  --grad-teal: rgba(0,180,160,0.100);
+
+  /* ================= وهج الهيرو (ورا الصورة مباشرة) ================= */
+
+  /* teal قوي ورا الصورة */
+  --hero-glow-orange: rgba(0,210,185,0.95);
+
+  /* طبقة عمق */
+  --hero-glow-teal: rgba(0,160,140,0.8);
+
+  /* ================= نصوص ================= */
+
+  --text:#ffffff;
+  --muted:#bfc7d6;
+
+  /* ================= TYPOGRAPHY DESKTOP ================= */
+
+  --h1:64px;
+  --p:18px;
+  --h2:32px;
+  --card-title:18px;
+  --card-text:14px;
+
+  /* ================= TYPOGRAPHY MOBILE ================= */
+
+  --h1-m:27px;
+  --p-m:16px;
+  --h2-m:26px;
+
+  /* ================= SIZES ================= */
+
+  --radius:16px;
+  --shadow:0 18px 55px rgba(0,0,0,0.35);
+
+  /* ✅ روابط (لو حبيت تضيفها هنا) */
+  --facebook-reviews-url: "https://www.facebook.com/hsauin.anaalwadelsess/";
+
+}
+/* =====================================================================================
+   ✅ [BASE]
+===================================================================================== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at 70% 20%, var(--grad-orange), transparent 44%),
+    radial-gradient(circle at 20% 55%, var(--grad-teal), transparent 44%),
+    var(--bg-dark);
+  color:var(--text);
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+.container{padding-inline:8%;}
+@media(max-width:980px){ .container{padding-inline:6%;} }
+
+/* =====================================================================================
+   ✅ [NAVBAR] Sticky + Transparent ( نون)
+===================================================================================== */
+nav{
+  position:sticky; top:0; z-index:999;
+  padding:14px 5%;
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  background:rgba(10,15,25,0.68);
+  backdrop-filter: blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+.brandLogo{
+  width:38px;height:38px;border-radius:12px;object-fit:cover;
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+}
+.brandText .title{font-weight:900;font-size:16px;line-height:1.2;}
+.brandText .sub{font-size:12px;color:var(--muted);opacity:.92;}
+
+.menu{display:flex; gap:18px; align-items:center;}
+.menu a{
+  color:var(--muted);
+  font-weight:800;
+  padding:8px 10px;
+  border-radius:12px;
+  transition:.25s;
+}
+.menu a:hover{color:var(--accent-teal); background:rgba(255,255,255,0.04);}
+
+.topBtn{
+  background:var(--accent-teal);
+  color:#001018;
+  padding:10px 16px;
+  border-radius:14px;
+  font-weight:900;
+  transition:.25s;
+  white-space:nowrap;
+}
+.topBtn:hover{transform:translateY(-1px); filter:brightness(1.05);}
+
+.hamburger{
+  display:none;
+  width:44px;height:44px;border-radius:14px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(0,0,0,0.25);
+  color:#fff;
+}
+@media(max-width:980px){
+  .menu{display:none;}
+  .hamburger{display:inline-flex;align-items:center;justify-content:center;}
+  /* ✅ إصلاح "من نحن" في الموبايل: يمنع تكسرها */
+  .topBtn{padding:10px 14px; font-size:14px;}
+  .brand{min-width:auto;}
+}
+
+/* =====================================================================================
+   ✅ [HERO] (الديسكتوب: صورة يسار + نص يمين) | (الموبايل: صورة فوق)
+===================================================================================== */
+.hero{
+  min-height:calc(100vh - 74px);
+  display:grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items:center;
+  gap:52px;
+  padding:46px 8% 20px;
+}
+
+.heroText h1{font-size:var(--h1);line-height:1.25;font-weight:900;margin-bottom:16px;}
+.heroText p{font-size:var(--p);color:var(--muted);line-height:1.9;margin-bottom:22px;max-width:660px;}
+
+.heroBtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.btnPrimary{
+  background:var(--accent-orange);
+  color:#1a0f00;
+  padding:12px 22px;
+  border-radius:14px;
+  font-weight:900;
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+}
+.btnPrimary:hover{transform:translateY(-1px); filter:brightness(1.03);}
+.btnSecondary{
+  background:rgba(39,211,177,0.10);
+  border:1px solid rgba(39,211,177,0.48);
+  color:var(--accent-teal);
+  padding:12px 22px;
+  border-radius:14px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.25s;
+}
+.btnSecondary:hover{transform:translateY(-1px);}
+
+.rating{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:900;}
+.rating .stars{color:var(--accent-teal);letter-spacing:2px;}
+
+.heroImage{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:480px;
+}
+
+/* ✅ وهج أقوى ورا الصورة (Orange واضح) */
+.heroImage::before{
+  content:'';
+  position:absolute;
+  width:min(560px, 95%);
+  height:min(560px, 95%);
+  background:
+    radial-gradient(circle at 56% 38%,
+      var(--hero-glow-orange),
+      var(--hero-glow-teal),
+      transparent 72%);
+  filter:blur(90px);
+  z-index:-2;
+  animation:pulse 6.2s ease-in-out infinite;
+}
+.heroImage::after{
+  content:'';
+  position:absolute;
+  width:min(460px, 86%);
+  height:min(460px, 86%);
+  background:radial-gradient(circle, rgba(255,157,47,0.45), transparent 70%);
+  filter:blur(55px);
+  z-index:-1;
+  opacity:.9;
+  animation:shine 4.8s ease-in-out infinite;
+}
+
+.heroPic{
+  width:min(520px, 95%);
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 0 70px rgba(255,157,47,0.20));
+animation: fadeIn 1.1s ease both, float 6.5s ease-in-out infinite;}
+/* أيقونات البرامج */
+.softIcon{
+  position:absolute;
+  width:120px;
+  height:130px;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 25px rgba(0,0,0,0.38));
+  opacity:.96;
+  animation:float 4.6s ease-in-out infinite;
+}
+.iconLeft{left:9%; top:22%;}
+.iconRight{right:9%; top:22%; animation-delay:.25s;}
+.iconMid{right:12%; bottom:18%; animation-delay:.5s;}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:28px;gap:28px;}
+  .heroImage{order:-1; min-height:360px;}
+  .heroText h1{font-size:var(--h1-m);}
+  .heroText p{font-size:var(--p-m); margin-inline:auto;}
+  .heroBtns{justify-content:center;}
+  .softIcon{width:50px;height:50px;}
+  .iconLeft{left:6%; top:12%;}
+  .iconRight{right:6%; top:12%;}
+}
+
+/* =====================================================================================
+   ✅ [SECTIONS]
+===================================================================================== */
+.section{padding:64px 8%;}
+.sectionHead{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:16px; margin-bottom:18px;
+}
+.sectionHead h2{font-size:var(--h2); font-weight:900;}
+.sectionHead .hint{color:var(--muted); font-size:14px; line-height:1.6;}
+
+@media(max-width:980px){
+  .section{padding:52px 6%;}
+  .sectionHead h2{font-size:var(--h2-m);}
+}
+
+/* =====================================================================================
+   ✅ [VIDEO EMBEDS] (بديل أزرار اذهب للكورس)
+===================================================================================== */
+.videoGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+@media(max-width:980px){ .videoGrid{grid-template-columns:1fr; gap:14px;} }
+
+.videoCard{
+  background:rgba(18,23,34,0.86);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+.videoCard h3{font-size:16px;font-weight:900;margin-bottom:10px;}
+.videoFrame{
+  width:100%;
+  aspect-ratio: 16 / 9;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#000;
+}
+.videoFrame iframe{width:100%;height:100%;border:0;}
+
+/* =====================================================================================
+   ✅ [SLIDER] احترافي + Dots + Buttons (عدد لا نهائي من الكروت)
+===================================================================================== */
+.sliderWrap{position:relative;}
+.slider{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:6px 4px 12px;
+  scroll-behavior:smooth;
+}
+.slider::-webkit-scrollbar{height:10px;}
+.slider::-webkit-scrollbar-track{background:rgba(255,255,255,0.06); border-radius:999px;}
+.slider::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18); border-radius:999px;}
+.slider::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.26);}
+
+.slide{flex:0 0 340px; scroll-snap-align:start;}
+@media(max-width:980px){ .slide{flex-basis:84vw;} }
+
+.card{
+  background:rgba(18,23,34,0.86);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px;
+  transition:.35s;
+}
+.card:hover{transform:translateY(-8px); box-shadow:0 28px 70px rgba(0,0,0,0.45);}
+
+.thumb{
+  width:100%; height:190px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(135deg, rgba(39,211,177,0.08), rgba(255,157,47,0.06));
+  margin-bottom:12px;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.card h3{font-size:var(--card-title); font-weight:900; margin-bottom:6px;}
+.card p{font-size:var(--card-text); color:var(--muted); line-height:1.7; margin-bottom:12px;}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btnSmall{
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(0,0,0,0.22);
+  color:#fff;
+  cursor:pointer;
+  transition:.25s;
+}
+.btnSmall:hover{transform:translateY(-1px);}
+.smallOrange{background:var(--accent-orange); color:#1a0f00; border-color:transparent;}
+.smallTeal{background:rgba(39,211,177,0.10); color:var(--accent-teal); border-color:rgba(39,211,177,0.45);}
+
+.sliderNav{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:10px;
+}
+.navBtn{
+  background:rgba(0,0,0,0.20);
+  border:1px solid rgba(255,255,255,0.10);
+  color:#fff;
+  width:44px; height:44px;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.25s;
+}
+.navBtn:hover{transform:translateY(-1px);}
+
+.dots{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.dot{
+  width:8px;height:8px;border-radius:999px;
+  background:rgba(255,255,255,0.20);
+  border:1px solid rgba(255,255,255,0.18);
+  cursor:pointer;
+  transition:.25s;
+}
+.dot.active{
+  width:22px;
+  background:linear-gradient(135deg, rgba(255,157,47,0.95), rgba(39,211,177,0.75));
+  border-color:rgba(255,255,255,0.22);
+}
+
+/* =====================================================================================
+   ✅ [PROMPT MODAL] مودال واحد فقط لكل الكروت (Copy + Close)
+===================================================================================== */
+.modal{
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(0,0,0,0.62);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.modal.show{display:flex;}
+.modalBox{
+  width:min(860px, 96vw);
+  border-radius:18px;
+  background:rgba(18,23,34,0.95);
+  border:1px solid rgba(255,255,255,0.10);
+  box-shadow:0 30px 90px rgba(0,0,0,0.55);
+  overflow:hidden;
+}
+.modalHead{
+  padding:14px 16px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:rgba(0,0,0,0.20);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.modalTitle{font-weight:900; font-size:16px;}
+.modalClose{
+  width:42px; height:42px; border-radius:14px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(0,0,0,0.25);
+  color:#fff; cursor:pointer;
+}
+.modalBody{padding:14px 16px;}
+.promptArea{
+  width:100%;
+  min-height:260px;
+  border-radius:16px;
+  padding:14px;
+  resize:vertical;
+  outline:none;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(0,0,0,0.22);
+  color:#fff;
+  line-height:1.9;
+  font-weight:600;
+}
+.modalActions{
+  display:flex; gap:10px; flex-wrap:wrap;
+  padding:14px 16px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  background:rgba(0,0,0,0.18);
+}
+.copyOk{font-size:12px;color:var(--muted);}
+
+/* =====================================================================================
+   ✅ [WHATSAPP FLOAT]
+===================================================================================== */
+.whatsapp{
+  position:fixed; left:18px; bottom:18px; z-index:1000;
+  width:56px; height:56px; border-radius:18px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, rgba(39,211,177,0.95), rgba(255,157,47,0.85));
+  border:1px solid rgba(255,255,255,0.22);
+  box-shadow:0 20px 55px rgba(0,0,0,0.45);
+  transition:.25s;
+}
+.whatsapp:hover{transform:translateY(-2px) scale(1.02);}
+.whatsapp span{font-weight:900; color:#001018;}
+
+/* =====================================================================================
+   ✅ Animations
+===================================================================================== */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(28px)}to{opacity:1; transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.62}50%{opacity:1}}
+@keyframes shine{0%,100%{transform:scale(1); opacity:.82}50%{transform:scale(1.06); opacity:1}}
+
+
+/* ================= ABOUT (CENTER + STRONG TEAL GLOW) ================= */
+.aboutCenter{
+  position:relative;
+  text-align:center;
+  padding:80px 20px;
+  margin:2 auto;
+  max-width:1000px;
+  background:none;
+  border:none;
+  box-shadow:none;
+}
+
+.aboutGlow{
+  position:absolute;
+  inset:-120px;
+  background:
+    radial-gradient(circle at 50% 38%,
+      rgba(20,224,195,0.90),
+      rgba(0,140,130,0.55),
+      transparent 65%);
+  filter:blur(85px);
+  opacity:1;
+  pointer-events:none;
+  z-index:0;
+}
+
+.aboutHeroImg{
+  position:relative;
+  width:100%;
+  max-width:620px;     /* تكبير حقيقي */
+  height:auto;
+  display:block;
+  margin:0 auto 20px;
+  object-fit:contain;
+  z-index:2;
+  transition:transform .4s ease;
+}
+.aboutHeroImg:hover{
+  transform:scale(1.02);
+}
+.aboutName{
+  position:relative;
+  z-index:1;
+  font-size:26px;
+  font-weight:900;
+  margin-bottom:0px;
+}
+
+
+.aboutRole{
+  position:relative;
+  z-index:1;
+  color:var(--accent-teal);
+  font-weight:900;
+    margin: top 0px;
+
+}
+
+.aboutDesc{
+  position:relative;
+  z-index:1;
+  color:var(--muted);
+  line-height:1.95;
+  max-width:720px;
+  margin:0 auto;
+}
+
+.contactLink{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:900;
+  background:rgba(39,211,177,0.10);
+  border:1px solid rgba(39,211,177,0.48);
+  color:var(--accent-teal);
+  transition:.25s;
+}
+.contactLink:hover{transform:translateY(-1px); filter:brightness(1.05);}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* توسيط أفقي */
+  justify-content: center; /* توسيط رأسي لو عايزه */
+  text-align: center;
+}
+
+
+#contact .videoGrid{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+@media (max-width: 768px){
+  .aboutMedia{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+}
+@media (max-width: 768px){
+  .aboutMedia{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+}
+
+/* =====================================================================================
+   ✅ [NEW] Scroll Fade-In (تعديل السرعة بدون لمس التصميم)
+===================================================================================== */
+/* ================= FOOTER ================= */
+
+
+
+/* ================= QUICK PROMPT BOX (OPEN) ================= */
+.mobileMenu{
+  position:fixed;
+  top:74px;
+  right:0;
+  width:100%;
+  background:rgba(10,15,25,0.95);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:none;
+  flex-direction:column;
+  padding:20px;
+  gap:15px;
+  z-index:998;
+}
+
+.mobileMenu a{
+  color:#fff;
+  font-weight:900;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+}
+
+.quickPromptArea {
+  width: 100%;
+  min-height: 220px;
+  background: #0f1720;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+}
+.quickPromptBox{
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(18,23,34,0.78);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+  padding: 18px;
+  backdrop-filter: blur(10px);
+}
+
+.qpHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom: 14px;
+}
+
+.qpTitle h2{
+  margin:0;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.qpHint{
+  margin-top:6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.qpCopyBtn{
+  background: #f2a23b;
+  border: none;
+  color: #111;
+  font-weight: 900;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.qpCopyBtn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.qpTextarea{
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.8;
+  outline: none;
+}
+
+.qpTextarea:focus{
+  border-color: rgba(39,211,177,0.55);
+  box-shadow: 0 0 0 3px rgba(39,211,177,0.15);
+}
+
+.qpFooter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top: 12px;
+}
+
+.qpNote{
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.qpResetBtn{
+  background: rgba(39,211,177,0.18);
+  border: 1px solid rgba(39,211,177,0.35);
+  color: #e9fffb;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor:pointer;
+  transition:.2s;
+}
+.qpResetBtn:hover{ filter: brightness(1.08); }
+.siteFooter{
+  background:#0f141c;
+  border-top:1px solid rgba(255,255,255,0.08);
+  margin-top:80px;
+  padding-top:50px;
+}
+
+.footerContainer{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:40px;
+  padding:0 40px 40px;
+}
+
+.footerBrand h3{
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.footerBrand p{
+  color:var(--muted);
+}
+
+.footerLinks,
+.footerSocial{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footerLinks a,
+.footerSocial a{
+  color:var(--muted);
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.footerLinks a:hover,
+.footerSocial a:hover{
+  color:var(--accent-teal);
+}
+
+.footerBottom{
+  text-align:center;
+  padding:20px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  color:var(--muted);
+  font-size:14px;
+}
+
+
+
+
+
+.fade-section{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+  will-change:opacity, transform;
+}
+.fade-section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================= NAV ========================= -->
+<nav>
+  <div class="brand">
+    <img class="brandLogo" src="assets/hero/hero.png" alt="logo">
+    <div class="brandText">
+      <div class="title">HA - Visual School</div>
+      <div class="sub"> اهلا بيك في موقعي الشخصي للتعلم </div>
+    </div>
+  </div>
+
+  <div class="menu">
+    <a href="#videos">المحاضرات</a>
+    <a href="#thumbs">الثامبنيلز</a>
+    <a href="#contact">تواصل معنا</a>
+  </div>
+
+  <a class="topBtn" href="#about">من نحن</a>
+  <button class="hamburger" onclick="openMobileMenu()">☰</button>
+</nav>
+
+<!-- ========================= HERO ========================= -->
+<section class="hero fade-section">
+  <div class="heroText">
+    <h1>تعلّم فإنّ في العلمِ ثمارًا<br>مرحبًا بك في مدرسة حسين علاء</h1>
+    <p>ابدأ معي مغامرةً ستجني ثمارها، وحوّل إبداعك إلى واقع ملموس باحترافية عالية.</p>
+
+    <div class="heroBtns">
+      <!-- ✅ يروح لقسم الفيد-يو -->
+     <a class="btnPrimary"
+   href="https://hussainalaa.com/"
+   target="_blank">
+   تصفح الكورسات
+</a>
+      <!-- ✅ يفتح الفيسبوك -->
+      <a class="btnSecondary"
+   href="https://www.facebook.com/share/p/1YmMikoPJR/"
+   target="_blank">
+   آراء الطلاب
+</a>
+    </div>
+
+    <div class="rating">
+      <span>Excellent</span>
+      <span class="stars">★★★★★</span>
+      <span>4.8 / 5</span>
+    </div>
+  </div>
+
+  <div class="heroImage">
+    <img class="heroPic" src="assets/hero/hero.png" alt="hero">
+
+    <img class="softIcon iconLeft"  src="assets/icons/pr.png" alt="Premiere">
+    <img class="softIcon iconRight" src="assets/icons/ae.png" alt="After Effects">
+    <img class="softIcon iconMid"   src="assets/icons/ps.png" alt="Photoshop">
+  </div>
+</section>
+<div class="mobileMenu" id="mobileMenu">
+  <a href="#videos">المحاضرات</a>
+  <a href="#thumbs">الثامبنيلز</a>
+  <a href="#contact">تواصل معنا</a>
+</div>
+
+<!-- ========================= VIDEOS (EMBED) ========================= -->
+<section id="videos" class="section fade-section">
+  <div class="sectionHead">
+    <h2>طريقة الشرح داخل الكورس كامل </h2>
+    <div class="hint"></div>
+  </div>
+
+  <div class="videoGrid" id="videoGrid">
+    <!-- ✅ [EDIT] فيديو 1 -->
+    <div class="videoCard">
+      <h3>'طريقة الشرح'</h3>
+      <div class="videoFrame">
+        <iframe src="https://www.youtube.com/embed/XaWtknHJiwM?si=MHUnmJvuZsBNtj1k&amp;start=49" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- ✅ [EDIT] فيديو 2 -->
+    <div class="videoCard">
+      <h3>اعلان كامل للكورس </h3>
+      <div class="videoFrame">
+        <iframe src="https://www.youtube.com/embed/Eat8CankevE?si=2v8bb_nFGmWEKJ7_&amp;start=49" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- ✅ [EDIT] فيديو 3 -->
+    <div class="videoCard">
+      <h3>الاعمال الفعلية اللي هتتعلمها داخل  الكورس </h3>
+      <div class="videoFrame">
+        <iframe src="https://www.youtube.com/embed/QMXCiwSghr0"  allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= THUMBNAILS SLIDER ========================= -->
+<!-- ================= QUICK PROMPT BOX (OPEN) ================= -->
+<section id="quickPrompt" class="section fade-section">
+  <div class="quickPromptBox">
+    <div class="qpHeader">
+      <div class="qpTitle">
+        <h2>برومبت جاهز للنسخ</h2>
+        <div class="qpHint">عدّل هنا براحتك، وبعدين انسخ. </div>
+      </div>
+
+      <button class="qpCopyBtn" type="button" onclick="copyQuickPrompt()">Copy</button>
+    </div>
+
+    <textarea id="quickPromptArea" class="quickPromptArea">
+</textarea>
+
+
+    <div class="qpFooter">
+      <div class="qpNote">💡 تقدر تستخدمه مباشرة في Midjourney / Krea / أي موديل.</div>
+      <button class="qpResetBtn" type="button" onclick="resetQuickPrompt()">إرجاع للأصل</button>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="thumbs" class="section fade-section">
+  <div class="sectionHead">
+    <h2>   الثامبنيلز الجاهزة </h2>
+    <div class="hint">هنا التصميمات الجاهزة اللي تقدر تعمل عليها صورتك بمجرد تغير المسميات فقط </div>
+  </div>
+
+  <!-- ✅ ده المكان اللي هيمتلي تلقائيًا -->
+  <div id="thumbsMount"></div>
+</section>
+
+<!-- ========================= ABOUT / CONTACT (اختياري) ========================= -->
+<section id="about" class="section"><section id="about" class="section">
+  <div class="sectionHead">
+    <h2>من أنا</h2>
+    <div class="hint">تعريف سريع عني .</div>
+  </div>
+
+  <div class="aboutCenter">
+    <div class="aboutGlow"></div>
+
+    <img class="aboutHeroImg" src="assets/hero/hero.png" alt="حسين علاء">
+
+    <h3 class="aboutName">حسين علاء</h3>
+    <div class="aboutRole">VFX & Visual Content Specialist</div>
+
+    <p class="aboutDesc">
+     
+ صانع محتوى بصري أؤمن أن التصميم لغة تعبر عن الشخصية قبل أن يكون مجرد شكل.
+أحوّل الأفكار إلى نتائج ملموسة من خلال خبرة عملية في اخراج الاعلانات السريعة والفيديوهات القصيرة التعريفية والتثقيفية الخاصة بالسوشيال ميديا وايضًا من خلال التصميم الإعلانات، صناعة الثامبنيلز الاحترافية، والمعالجة البصرية التي تخدم الهدف وتحقق التأثير.
+    </p>
+  </div>
+</section></section>
+
+<section id="contact" class="section fade-section">
+  <div class="sectionHead">
+    <h2>تواصل معنا</h2>
+    <div class="hint"> </div>
+  </div>
+
+  <div class="videoGrid"><div class="videoGrid">
+  <div class="videoCard">
+    <h3>يوتيوب</h3>
+    <a class="contactLink" href="https://youtube.com/@hussain-pop?si=i7P-_FYFy1Mfo2JH" target="_blank">افتح القناة</a>
+  </div>
+
+  <div class="videoCard">
+    <h3>إنستجرام</h3>
+    <a class="contactLink" href="https://www.instagram.com/hussein.ala.a?igsh=MWliMXNiZDBmd2R2Yg==" target="_blank">معرض اعمالي </a>
+  </div>
+
+  <div class="videoCard">
+    <h3>واتساب</h3>
+    <a class="contactLink" href="https://wa.me/201035708838" target="_blank">ابدأ محادثة</a>
+  </div>
+</div> </div>
+</section>
+
+<!-- ✅ WhatsApp Floating -->
+<a class="whatsapp" href="#" target="_blank" aria-label="WhatsApp"><span>WA</span></a>
+
+<!-- ========================= PROMPT MODAL (ONE FOR ALL) ========================= -->
+<div class="modal" id="promptModal" onclick="closePromptOnBackdrop(event)">
+  <div class="modalBox" role="dialog" aria-modal="true">
+    <div class="modalHead">
+      <div class="modalTitle" id="promptTitle">Prompt</div>
+      <button class="modalClose" onclick="closePrompt()" aria-label="Close">✕</button>
+    </div>
+    <div class="modalBody">
+      <textarea class="promptArea" id="promptArea"></textarea>
+    </div>
+    <div class="modalActions">
+      <button class="btnPrimary" onclick="copyPrompt()">Copy</button>
+      <button class="btnSecondary" onclick="closePrompt()">إغلاق</button>
+      <span class="copyOk" id="copyOk"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================================
+   ✅ [CONTROL] Facebook Reviews link
+===================================================================================== */
+function openFacebook(){
+  const url = getComputedStyle(document.documentElement).getPropertyValue('--facebook-reviews-url').trim().replaceAll('"','');
+  window.open(url, '_blank');
+}
+
+/* =====================================================================================
+   ✅ PROMPT MODAL (واحد لكل الكروت)
+===================================================================================== */
+const modal = document.getElementById('promptModal');
+const promptTitle = document.getElementById('promptTitle');
+const promptArea = document.getElementById('promptArea');
+const copyOk = document.getElementById('copyOk');
+
+function openPromptWithText(title, text){
+  promptTitle.textContent = title || 'Prompt';
+  promptArea.value = text || '';
+  copyOk.textContent = '';
+  modal.classList.add('show');
+}
+
+function openPrompt(btn){
+  const title = btn.getAttribute('data-prompt-title') || 'Prompt';
+  const text  = btn.getAttribute('data-prompt-text') || '';
+  openPromptWithText(title, text);
+}
+
+// ✅ Cache عشان ما يعملش تحميل كل مرة (أسرع وما يهنّج)
+const PROMPT_CACHE = {};
+
+async function openPromptById(btn){
+  const id = btn.getAttribute('data-prompt-id');
+  const item = (window.PROMPTS && window.PROMPTS[id]) ? window.PROMPTS[id] : null;
+
+  if(!item){
+    alert('Prompt not found: ' + id);
+    return;
+  }
+
+  const title = item.title || id;
+
+  // 1) لو النص موجود مباشرة
+  if(item.text){
+    openPromptWithText(title, item.text);
+    return;
+  }
+
+  // 2) لو عنده file → اقرأه من txt
+  if(item.file){
+    // لو محمّل قبل كده
+    if(PROMPT_CACHE[item.file]){
+      openPromptWithText(title, PROMPT_CACHE[item.file]);
+      return;
+    }
+
+    try{
+      const res = await fetch(item.file, { cache: 'no-cache' });
+      if(!res.ok) throw new Error(`HTTP ${res.status} for ${item.file}`);
+      const text = await res.text();
+
+      PROMPT_CACHE[item.file] = text;
+      openPromptWithText(title, text);
+      return;
+    }catch(err){
+      console.error('Failed to load prompt file:', item.file, err);
+      alert('مش قادر أقرأ ملف البرومبت: ' + item.file);
+      return;
+    }
+  }
+
+  // 3) لا text ولا file
+  alert('Prompt has no text/file: ' + id);
+}
+
+function closePrompt(){ modal.classList.remove('show'); }
+function closePromptOnBackdrop(e){ if(e.target === modal) closePrompt(); }
+
+async function copyPrompt(){
+  try{
+    await navigator.clipboard.writeText(promptArea.value);
+    copyOk.textContent = 'تم النسخ ✅';
+  }catch(err){
+    promptArea.select();
+    document.execCommand('copy');
+    copyOk.textContent = 'تم النسخ ✅';
+  }
+}
+
+/* =====================================================================================
+   ✅ SLIDER NAV
+===================================================================================== */
+function slideNext(id){
+  const el = document.getElementById(id);
+  const step = el.querySelector('.slide')?.getBoundingClientRect().width || 340;
+  el.scrollBy({ left: -(step + 14), behavior:'smooth' }); // RTL
+}
+function slidePrev(id){
+  const el = document.getElementById(id);
+  const step = el.querySelector('.slide')?.getBoundingClientRect().width || 340;
+  el.scrollBy({ left: (step + 14), behavior:'smooth' });
+}
+
+/* =====================================================================================
+   ✅ DOTS (احترافية) لسلايدر واحد
+===================================================================================== */
+function buildDots(sliderId, dotsId){
+  const slider = document.getElementById(sliderId);
+  const dotsWrap = document.getElementById(dotsId);
+  if(!slider || !dotsWrap) return;
+
+  const slides = [...slider.querySelectorAll('.slide')];
+  dotsWrap.innerHTML = '';
+
+  slides.forEach((_, i)=>{
+    const d = document.createElement('button');
+    d.className = 'dot';
+    d.type = 'button';
+    d.addEventListener('click', ()=>{
+      slides[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+    });
+    dotsWrap.appendChild(d);
+  });
+
+  function setActive(){
+    const rect = slider.getBoundingClientRect();
+    let best = 0, bestDist = Infinity;
+
+    slides.forEach((s, i)=>{
+      const r = s.getBoundingClientRect();
+      const center = r.left + r.width/2;
+      const dist = Math.abs((rect.left + rect.width/2) - center);
+      if(dist < bestDist){ bestDist = dist; best = i; }
+    });
+
+    [...dotsWrap.children].forEach((dot, i)=>dot.classList.toggle('active', i===best));
+  }
+
+  slider.addEventListener('scroll', ()=>requestAnimationFrame(setActive));
+  window.addEventListener('resize', setActive);
+  setActive();
+}
+
+/* =====================================================================================
+   ✅ Mobile menu
+===================================================================================== */
+function openMobileMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
+
+<!-- ✅ مهم جداً: خلي prompts.js جنب index.htm -->
+<script src="./prompts.js"></script>
+
+<!-- ✅ جديد: data + render -->
+<script src="./thumbs-data.js"></script>
+<script src="./thumbs-render.js"></script>
+
+<!-- =====================================================================================
+   ✅ [NEW] Fade-In on Scroll (خفيف جدًا + بدون تهنيج)
+===================================================================================== -->
+<script>
+(function(){
+  const io = new IntersectionObserver((entries)=>{
+    for(const entry of entries){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target); // ✅ مرة واحدة فقط لتخفيف الحمل
+      }
+    }
+  },{
+    threshold: 0.15
+  });
+
+  document.querySelectorAll('.fade-section').forEach(el=>io.observe(el));
+})();
+</script>
+<script src="./prompts.js"></script>
+<script src="./thumbs-data.js"></script>
+<script src="./thumbs-render.js"></script>
+
+<script>
+window.onload = function() {
+
+  const QUICK_PROMPT_DEFAULT = `
+# REFERENCE & SUBJECT CONT
+
+Use the second uploaded image as a STRICT visual reference. @char1
+Use the first uploaded image as the subject only. @char1 Preserve the subject’s identity and facial structure exactly.
+Do not modify face shape, features, or expression.
+
+This reference defines the final look and execution, including:
+
+composition
+camera framing and crop
+lighting direction, contrast, and intensity
+color grading and saturation
+sharpness and clarity
+background style and depth
+graphic style and hierarchy
+typography weight, spacing, and placement
+overall thumbnail structure
+
+DO NOT reinterpret, redesign, stylize, or modernize.
+DO NOT take inspiration only.
+Visually replicate the reference thumbnail as close as possible (1:1 match).
+
+IDENTITY PRESERVATION (NON-NEGOTIABLE)
+
+Use the first uploaded image as the SUBJECT ONLY. @char1
+
+Preserve the subject’s identity and facial structure exactly:
+
+Do NOT change face shape
+Do NOT alter features
+Do NOT modify expression
+No identity drift under any condition
+
+CAMERA & VISUAL MATCHING (MANDATORY)
+
+Match the reference thumbnail exactly in:
+
+camera angle
+framing and crop
+subject scale inside the frame
+lighting logic and shadow behavior
+contrast ratio
+color grading and saturation levels
+background depth and separation
+overall clarity and sharpness
+
+CONTEXT ADAPTATION AXIS (LIMITED & CONTROLLED)
+
+# Selected context:
+
+” **High-energy cinematic superhero scene** — speed-based hero moving at extreme velocity through a city battlefield, motion blur and light trails slicing through the environment, shattered debris frozen in mid-air, dynamic camera angle, dramatic contrast lighting, electric atmosphere filled with energy particles, epic Avengers-style scale, intense action moment capturing speed beyond human limits.  ”
+
+“
+
+Apply very subtle visual cues ONLY (background details or minimal graphic accents)
+that support the selected context WITHOUT:
+
+changing layout
+changing hierarchy
+changing lighting logic
+changing composition
+changing typography structure
+
+Context must feel embedded, not decorative.
+
+CINEMATIC COMPOSITING, LIGHT & DEPTH INTEGRATION (OPTIONAL / CONTEXT-AWARE)
+
+Compositing Logic:
+Create a strong, realistic, and cinematic integration between the subject and the background environment,
+ensuring the subject feels physically present inside the scene, not cut out or pasted.
+
+This section adapts automatically based on the selected background environment and subject domain,
+without changing layout, composition, typography, or camera framing.
+
+Light & Shadow Relationship:
+
+Lighting on the subject must logically originate from the environment
+
+Shadows must be grounded, directional, and consistent with scene light sources
+
+Contact shadows at feet, shoulders, and edges must reinforce depth
+
+No flat lighting separation between subject and background
+
+Depth & Spatial Separation:
+
+Use realistic depth cues to separate subject from background
+
+Apply natural foreground–midground–background layering
+
+Atmospheric perspective may be used subtly if the environment supports it
+
+Depth must enhance realism, not blur readability
+
+Cinematic Integration Rules:
+
+Light falloff must feel natural and scene-based
+
+Edge lighting (rim light) is allowed only if justified by the environment
+
+Contrast must support a cinematic look without crushing details
+
+Avoid artificial glow halos or unrealistic cutout edges
+
+Color & Tone Unification:
+
+Subject color tones must harmonize with background color grading
+
+Shadow color temperature must match the environment mood
+
+No color mismatch between subject skin, clothing, and background
+
+Environment-Driven Adaptation:
+
+This section dynamically adapts based on:
+
+Background theme (historical / educational / cinematic / modern)
+
+Scene energy level
+
+Selected context domain
+
+No fixed lighting preset is enforced unless specified below.
+
+Editable Parameters (Optional Control):
+Compositing Intensity: [Natural / Cinematic / Dramatic but realistic]
+Light Contrast Level: [Soft / Balanced / Strong]
+Shadow Presence: [Light grounding / Medium depth / Strong cinematic]
+Depth Separation Level: [Subtle / Medium / Pronounced]
+
+Strict Constraints:
+
+No change to camera angle or framing
+
+No change to layout or text hierarchy
+
+No artificial glow unrelated to environment
+
+No visual effects that reduce realism
+
+This section enhances realism, weight, and cinematic presence only,
+without introducing creative redesign.
+
+SKIN RETOUCHING (PROFESSIONAL & REALISTIC)
+
+Apply professional skin retouching:
+
+remove acne and skin blemishes
+natural smooth skin
+preserve realistic skin texture
+no plastic look
+no over-smoothing
+no AI-waxy skin
+
+# GRAPHIC & TEXT — EXACT MATCH REQUIRED
+
+Main Title Text:
+
+"برق الزمان  "
+
+same position
+same size
+same font weight
+same style
+same color or gradient as the reference
+
+Secondary Text:
+
+> “اللهو الخفي"
+> 
+
+thin font
+capital “” only
+apply glow effect ONLY on this text
+glow intensity and color must match the reference exactly
+
+Attention Mark:
+
+small yellow exclamation mark ()
+placed on the right
+same size and exact placement as the reference
+
+Arabic Subtitle:
+
+**"** [**م](https://www.facebook.com/mstr.bdallh.sh.wt?__cft__[0]=AZaOvoK6j2364amalCYkHjIur2K6qrTfrBozP3UTVSh5A9smbg0vEzR0cShC_nefA7ZNtyjqz9MdJJkryM9u1Nk6lFh6iaJRAYzBM4b_2qnldM3voTOC8THprxheylekHLajCSHBN9N6HmOL9obygiRU6Jnf7NN1B153kfyyaAVnbw&__tn__=R]-R)حمود زين"**
+
+thin, small font
+stacked vertically
+placed exactly like the reference
+
+Text Style Logic:
+Apply a predefined Text Style Preset that controls the emotional tone and visual presence of typography,
+while keeping font size, weight, placement, spacing, hierarchy, and effects exactly as the reference.
+
+This section defines how the text feels, not where it is or how large it appears.
+
+Text Style Rules:
+
+Do NOT change font family
+
+Do NOT change text size
+
+Do NOT change placement or alignment
+
+Do NOT change hierarchy
+
+No additional effects beyond the reference
+
+Editable Parameters:
+
+# Text Style Preset Name:
+
+**[Arabic YouTube thumbnail title, unified yellow→orange gradient fill across all letters, glossy plastic look, dark outline, glow, heavy shadow, no metallic** 
+
+Text Presence Level: [Subtle / Balanced / Strong but controlled]
+
+Strict Constraint:
+Only text mood and aura may adapt.
+No changes to text content, size, position, hierarchy, or effects defined in the reference.
+
+CHARACTER WARDROBE & OUTFIT ADAPTATION (THUMBNAIL SAFE)
+Outfit & Clothing Logic:
+
+Adapt the subject’s clothing, accessories, and outfit styling based on the selected Character Archetype,
+while keeping the same body proportions, pose, facial identity, and expression.
+
+The outfit must visually communicate the character’s role, background, and energy,
+without affecting camera framing, composition, lighting logic, or thumbnail structure.
+
+Wardrobe Rules:
+
+Clothing style must align with the selected archetype and context
+Fabric, cuts, layers, and accessories should feel natural and believable
+Outfit should look integrated with the subject, not overlaid or pasted
+Avoid cosplay or exaggerated fantasy unless explicitly required
+Maintain realism and visual balance suitable for a professional thumbnail
+
+Compositing Consistency:
+
+Outfit lighting and shadows must match the reference lighting exactly
+Fabric folds, highlights, and material response must follow body movement
+Colors must harmonize with the reference color grading
+No mismatch between skin, body, and clothing
+
+Thumbnail Readability:
+
+Outfit silhouette must remain clear at small sizes
+Clothing must not overpower text or graphic hierarchy
+
+Editable Parameters:
+
+# Character Archetype:
+
+**[Speedster Avenger Archetype** — athletic male superhero, sharp focused eyes, confident determined expression, body posture leaning forward mid-run, aura of pure kinetic energy, calm control despite extreme speed, heroic presence.    ****.       ****.
+
+**]**
+
+Outfit Mood / Energy:
+
+**[ Speedster Avenger Archetype** — athletic male superhero, sharp focused eyes, confident determined expression, body posture leaning forward mid-run, aura of pure kinetic energy, calm control despite extreme speed, heroic presence.  ****.
+
+**]**
+
+Clothing Material Style:
+[  **Speedster Avenger Archetype** — athletic male superhero, sharp focused eyes, confident determined expression, body posture leaning forward mid-run, aura of pure kinetic energy, calm control despite extreme speed, heroic presence.  .
+**]**
+
+Color Direction (within reference grading):
+[EDIT HERE]
+
+Strict Constraint:
+
+Only the outfit and styling may adapt based on the selected archetype.
+No changes to face, body structure, pose, layout, lighting, typography, or composition.
+
+FINAL RULES (NON-NEGOTIABLE)
+
+This is a thumbnail replication task, NOT a creative redesign
+Accuracy > creativity
+Visual similarity is the top priority
+
+No logos
+No watermarks
+No additional elements
+
+**Default Output (YouTube Thumbnail – NON-NEGOTIABLE BASELINE):**
+
+- Resolution: **1280 × 720 px**
+- Aspect Ratio: **16:9**
+- Pixel Density: **Standard web (72–96 DPI equivalent)**
+- Orientation: **Landscape**
+- Safe Area: **All critical text, face, and key elements must remain inside YouTube safe margins**
+
+**Scaling Rules (Structure-Safe):**
+
+- Scaling must be **proportional only** (uniform scaling)
+- **NO cropping** of the subject, text, or graphic elements
+- **NO repositioning** of text, subject, or layout
+- **NO resizing of typography relative to layout**
+- Visual hierarchy must remain **pixel-accurate to the reference**
+
+**Alternative Size Adaptation (Optional – Controlled):**
+
+If a different platform size is explicitly selected, apply the following rules **without altering composition logic**:
+
+- Maintain original **camera framing, subject scale, and text relationships**
+- Use **canvas expansion or reduction only**
+- Fill extra space using **background extension consistent with the reference depth, texture, and lighting**
+- Never compress, stretch, or distort the subject or typography
+
+**Supported Optional Ratios (Explicit Selection Required):**
+
+- **1:1 (1080 × 1080)** – Square
+- **4:5 (1080 × 1350)** – Vertical feed
+- **9:16 (1080 × 1920)** – Reels / Shorts
+
+> If no ratio is specified, the system MUST default to YouTube Thumbnail (16:9 – 1280×720)
+>
+`;
+
+  const area = document.getElementById("quickPromptArea");
+
+  if (area) {
+    area.value = QUICK_PROMPT_DEFAULT;
+  }
+
+};
+</script>
+
+</body>
+</html>
+<footer class="siteFooter">
+  <div class="footerContainer">
+
+    <div class="footerBrand">
+      <h3>HA - Visual School</h3>
+      <p>منصة تعليم التصميم وصناعة المحتوى البصري</p>
+    </div>
+
+    <div class="footerLinks">
+      <a href="#videos">الكورسات</a>
+      <a href="#thumbs">الثامبنيلز</a>
+      <a href="#contact">تواصل معنا</a>
+    </div>
+
+    <div class="footerSocial">
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://youtube.com" target="_blank">YouTube</a>
+    </div>
+
+  </div>
+
+  <div class="footerBottom">
+    © 2026 HA - Visual School | All Rights Reserved
+  </div>
+</footer>
+</body>
+</html>
+
