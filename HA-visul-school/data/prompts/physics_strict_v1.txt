@@ -1,0 +1,320 @@
+# REFERENCE & SUBJECT CONTROL
+
+Use the second uploaded image as a STRICT visual reference. @char1
+Use the first uploaded image as the subject only. @char1 Preserve the subject’s identity and facial structure exactly.
+Do not modify face shape, features, or expression.
+
+This reference defines the final look and execution, including:
+
+composition
+camera framing and crop
+lighting direction, contrast, and intensity
+color grading and saturation
+sharpness and clarity
+background style and depth
+graphic style and hierarchy
+typography weight, spacing, and placement
+overall thumbnail structure
+
+DO NOT reinterpret, redesign, stylize, or modernize.
+DO NOT take inspiration only.
+Visually replicate the reference thumbnail as close as possible (1:1 match).
+
+IDENTITY PRESERVATION (NON-NEGOTIABLE)
+
+Use the first uploaded image as the SUBJECT ONLY. @char1
+
+Preserve the subject’s identity and facial structure exactly:
+
+Do NOT change face shape
+Do NOT alter features
+Do NOT modify expression
+No identity drift under any condition
+
+CAMERA & VISUAL MATCHING (MANDATORY)
+
+Match the reference thumbnail exactly in:
+
+camera angle
+framing and crop
+subject scale inside the frame
+lighting logic and shadow behavior
+contrast ratio
+color grading and saturation levels
+background depth and separation
+overall clarity and sharpness
+
+CONTEXT ADAPTATION AXIS (LIMITED & CONTROLLED)
+
+# Selected context:
+
+” *The field focuses onphysics.*
+
+“
+
+Apply very subtle visual cues ONLY (background details or minimal graphic accents)
+that support the selected context WITHOUT:
+
+changing layout
+changing hierarchy
+changing lighting logic
+changing composition
+changing typography structure
+
+Context must feel embedded, not decorative.
+
+CINEMATIC COMPOSITING, LIGHT & DEPTH INTEGRATION (OPTIONAL / CONTEXT-AWARE)
+
+Compositing Logic:
+Create a strong, realistic, and cinematic integration between the subject and the background environment,
+ensuring the subject feels physically present inside the scene, not cut out or pasted.
+
+This section adapts automatically based on the selected background environment and subject domain,
+without changing layout, composition, typography, or camera framing.
+
+Light & Shadow Relationship:
+
+Lighting on the subject must logically originate from the environment
+
+Shadows must be grounded, directional, and consistent with scene light sources
+
+Contact shadows at feet, shoulders, and edges must reinforce depth
+
+No flat lighting separation between subject and background
+
+Depth & Spatial Separation:
+
+Use realistic depth cues to separate subject from background
+
+Apply natural foreground–midground–background layering
+
+Atmospheric perspective may be used subtly if the environment supports it
+
+Depth must enhance realism, not blur readability
+
+Cinematic Integration Rules:
+
+Light falloff must feel natural and scene-based
+
+Edge lighting (rim light) is allowed only if justified by the environment
+
+Contrast must support a cinematic look without crushing details
+
+Avoid artificial glow halos or unrealistic cutout edges
+
+Color & Tone Unification:
+
+Subject color tones must harmonize with background color grading
+
+Shadow color temperature must match the environment mood
+
+No color mismatch between subject skin, clothing, and background
+
+Environment-Driven Adaptation:
+
+This section dynamically adapts based on:
+
+Background theme (historical / educational / cinematic / modern)
+
+Scene energy level
+
+Selected context domain
+
+No fixed lighting preset is enforced unless specified below.
+
+Editable Parameters (Optional Control):
+Compositing Intensity: [Natural / Cinematic / Dramatic but realistic]
+Light Contrast Level: [Soft / Balanced / Strong]
+Shadow Presence: [Light grounding / Medium depth / Strong cinematic]
+Depth Separation Level: [Subtle / Medium / Pronounced]
+
+Strict Constraints:
+
+No change to camera angle or framing
+
+No change to layout or text hierarchy
+
+No artificial glow unrelated to environment
+
+No visual effects that reduce realism
+
+This section enhances realism, weight, and cinematic presence only,
+without introducing creative redesign.
+
+SKIN RETOUCHING (PROFESSIONAL & REALISTIC)
+
+Apply professional skin retouching:
+
+remove acne and skin blemishes
+natural smooth skin
+preserve realistic skin texture
+no plastic look
+no over-smoothing
+no AI-waxy skin
+
+# GRAPHIC & TEXT — EXACT MATCH REQUIRED
+
+Main Title Text:
+
+"بالطو"
+
+same position
+same size
+same font weight
+same style
+same color or gradient as the reference
+
+Secondary Text:
+
+"العلوم الحديثة "
+
+thin font
+capital “G” only
+apply glow effect ONLY on this text
+glow intensity and color must match the reference exactly
+
+Attention Mark:
+
+small yellow exclamation mark (!)
+placed on the right
+same size and exact placement as the reference
+
+Arabic Subtitle:
+
+**"** مستر  حسين علاء **"**
+
+thin, small font
+stacked vertically
+placed exactly like the reference
+
+Text Style Logic:
+Apply a predefined Text Style Preset that controls the emotional tone and visual presence of typography,
+while keeping font size, weight, placement, spacing, hierarchy, and effects exactly as the reference.
+
+This section defines how the text feels, not where it is or how large it appears.
+
+Text Style Rules:
+
+Do NOT change font family
+
+Do NOT change text size
+
+Do NOT change placement or alignment
+
+Do NOT change hierarchy
+
+No additional effects beyond the reference
+
+Editable Parameters:
+
+# Text Style Preset Name:
+
+- *[**Arabic bold rounded display typography, extremely thick soft-edged glyphs, full-word continuous vertical gradient fill from bright sunflower yellow at the top to deep pumpkin orange at the bottom, high-gloss gel coating, subtle top-edge specular highlight band, medium 3D extrusion depth, smooth bevelled edges, thick dark brown outer stroke, soft amber rim glow, strong cinematic drop shadow behind letters, warm firelight color grading, YouTube thumbnail headline style, ultra high saturation and contrast, no metallic, no gold, no chrome, single unified gradient across entire phrase
+
+**]**
+
+Text Presence Level: [Subtle / Balanced / Strong but controlled]
+
+Strict Constraint:
+Only text mood and aura may adapt.
+No changes to text content, size, position, hierarchy, or effects defined in the reference.
+
+CHARACTER WARDROBE & OUTFIT ADAPTATION (THUMBNAIL SAFE)
+Outfit & Clothing Logic:
+
+Adapt the subject’s clothing, accessories, and outfit styling based on the selected Character Archetype,
+while keeping the same body proportions, pose, facial identity, and expression.
+
+The outfit must visually communicate the character’s role, background, and energy,
+without affecting camera framing, composition, lighting logic, or thumbnail structure.
+
+Wardrobe Rules:
+
+Clothing style must align with the selected archetype and context
+Fabric, cuts, layers, and accessories should feel natural and believable
+Outfit should look integrated with the subject, not overlaid or pasted
+Avoid cosplay or exaggerated fantasy unless explicitly required
+Maintain realism and visual balance suitable for a professional thumbnail
+
+Compositing Consistency:
+
+Outfit lighting and shadows must match the reference lighting exactly
+Fabric folds, highlights, and material response must follow body movement
+Colors must harmonize with the reference color grading
+No mismatch between skin, body, and clothing
+
+Thumbnail Readability:
+
+Outfit silhouette must remain clear at small sizes
+Clothing must not overpower text or graphic hierarchy
+
+Editable Parameters:
+
+# Character Archetype:
+
+**[Stylish physicist look, futuristic academic clothing, structured jacket, glowing blue trim accents, holographic formula overlays, cinematic science lighting, high-impact thumbnail presence]**
+
+Outfit Mood / Energy:
+
+**[Stylish physicist look, futuristic academic clothing, structured jacket, glowing blue trim accents, holographic formula overlays, cinematic science lighting, high-impact thumbnail presence]**
+
+Clothing Material Style:
+[**Stylish physicist look, futuristic academic clothing, structured jacket, glowing blue trim accents, holographic formula overlays, cinematic science lighting, high-impact thumbnail presence]**
+
+Color Direction (within reference grading):
+[EDIT HERE]
+
+Strict Constraint:
+
+Only the outfit and styling may adapt based on the selected archetype.
+No changes to face, body structure, pose, layout, lighting, typography, or composition.
+
+FINAL RULES (NON-NEGOTIABLE)
+
+This is a thumbnail replication task, NOT a creative redesign
+Accuracy > creativity
+Visual similarity is the top priority
+
+No logos
+No watermarks
+No additional elements
+
+**Default Output (YouTube Thumbnail – NON-NEGOTIABLE BASELINE):**
+
+- Resolution: **1280 × 720 px**
+- Aspect Ratio: **16:9**
+- Pixel Density: **Standard web (72–96 DPI equivalent)**
+- Orientation: **Landscape**
+- Safe Area: **All critical text, face, and key elements must remain inside YouTube safe margins**
+
+**Scaling Rules (Structure-Safe):**
+
+- Scaling must be **proportional only** (uniform scaling)
+- **NO cropping** of the subject, text, or graphic elements
+- **NO repositioning** of text, subject, or layout
+- **NO resizing of typography relative to layout**
+- Visual hierarchy must remain **pixel-accurate to the reference**
+
+**Alternative Size Adaptation (Optional – Controlled):**
+
+If a different platform size is explicitly selected, apply the following rules **without altering composition logic**:
+
+- Maintain original **camera framing, subject scale, and text relationships**
+- Use **canvas expansion or reduction only**
+- Fill extra space using **background extension consistent with the reference depth, texture, and lighting**
+- Never compress, stretch, or distort the subject or typography
+
+**Supported Optional Ratios (Explicit Selection Required):**
+
+- **1:1 (1080 × 1080)** – Square
+- **4:5 (1080 × 1350)** – Vertical feed
+- **9:16 (1080 × 1920)** – Reels / Shorts
+
+> If no ratio is specified, the system MUST default to YouTube Thumbnail (16:9 – 1280×720)
+> 
+
+**Strict Constraints:**
+
+- No layout redesign
+- No hierarchy changes
+- No typography scaling tricks
